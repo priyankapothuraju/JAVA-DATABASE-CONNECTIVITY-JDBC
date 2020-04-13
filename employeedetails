@@ -1,0 +1,45 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.Statement;
+import java.util.Scanner;
+
+public class employedetails
+{
+	public static void empdetails()
+	{
+		String ename = null,company = null;
+	    double salary=0;
+		int marks=0,i=0,n=0;
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/priyanka", "root","priyanka@123");
+			while(n<=5)
+			{
+			System.out.println("enter employee name");
+			Scanner s=new Scanner(System.in);
+			ename=s.next();
+			System.out.println("enter salary");
+			salary=s.nextDouble();
+			System.out.println("enter company");
+			company=s.next();
+			Statement stmt=con.createStatement();
+			stmt.executeUpdate("insert into empdetails values('"+ename+"','"+salary+"','"+company+"')");
+			n++;
+			}
+			con.close();
+		}
+		catch (Exception e)
+		{
+			System.out.println(e);
+		}
+		}
+
+	public static void main(String[] args)
+	{
+		employedetails t=new employedetails();
+		t.empdetails();
+
+	}
+}
